@@ -9,6 +9,8 @@ namespace CodelyTv\OpenFlight\Flights\Infrastructure;
 use CodelyTv\OpenFlight\Flights\Domain\Flight;
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
 use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
+use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
+use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
 
 
@@ -37,4 +39,31 @@ final class MysqlFlightRepository implements FlightRepository
         $statement->execute();
     }
 
+    public function findBetweenDates(DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): array
+    {
+        $sql = 'SELECT * FROM flight WHERE Departure-date BETWEEN :dateFrom AND :dateTo';
+        $statement = $this->mysql->PDO()->prepare($sql);
+        $statement->bindValue(':dateFrom', DateTimeValueObject::convertDateTimeToString($dateTimeFrom));
+        $statement->bindValue(':dateTo', DateTimeValueObject::convertDateTimeToString($dateTimeTo));
+        $statement->execute();
+        $flightsQueryResult = $statement->fetchAll();
+
+        $flights = [];
+        foreach ($flightsQueryResult as $flight) {
+            array_push(
+                $flights,
+                new Flight(
+                    new Uuid($flight['Id']),
+                    $flight['Origin'],
+                    $flight['Destination'],
+                    $flight['Flight-hours'],
+                    PriceValueObject::createPrice(intval($flight['Price']), $flight['Currency']),
+                    DateTimeValueObject::createDateTimeValueObjectFromString($flight['Departure-date']),
+                    $flight['Aircraft'],
+                    $flight['Airline']
+                )
+            );
+        }
+        return $flights;
+    }
 }
