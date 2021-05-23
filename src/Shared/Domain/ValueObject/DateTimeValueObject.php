@@ -22,6 +22,10 @@ class DateTimeValueObject
 
     public static function createDateTimeValueObjectFromString(string $date): DateTimeValueObject
     {
+        if (self::checkStringDateHasNoTime($date)) {
+            $date .= ' 00:00:00';
+        }
+
         return new self(DateTime::createFromFormat(self::dateFormat, $date));
     }
 
@@ -33,5 +37,11 @@ class DateTimeValueObject
     public function isPastDate(): bool
     {
         return $this->value < new DateTime(self::today);
+    }
+
+    private static function checkStringDateHasNoTime(string $date): bool
+    {
+        $dateParse = date_parse($date);
+        return empty($dateParse['hour']);
     }
 }
