@@ -39,10 +39,11 @@ final class MysqlFlightRepository implements FlightRepository
         $statement->execute();
     }
 
-    public function findBetweenDates(DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): array
+    public function findBetweenDates(string $destination, DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): array
     {
-        $sql = 'SELECT * FROM flight WHERE `Departure-date` BETWEEN :dateFrom AND :dateTo';
+        $sql = 'SELECT * FROM flight WHERE Destination = :destination AND `Departure-date` BETWEEN :dateFrom AND :dateTo';
         $statement = $this->mysql->PDO()->prepare($sql);
+        $statement->bindValue(':destination', $destination);
         $statement->bindValue(':dateFrom', DateTimeValueObject::convertDateTimeToString($dateTimeFrom));
         $statement->bindValue(':dateTo', DateTimeValueObject::convertDateTimeToString($dateTimeTo));
         $statement->execute();

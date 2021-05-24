@@ -12,9 +12,9 @@ class FlightsFinder
     {
     }
 
-    public function __invoke(DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): FindFlightsResponse
+    public function __invoke(string $destination, DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): FindFlightsResponse
     {
-        $flights = $this->repository->findBetweenDates($dateTimeFrom, $dateTimeTo);
+        $flights = $this->repository->findBetweenDates($destination, $dateTimeFrom, $dateTimeTo);
 
         $flightsResponse = [];
         foreach ($flights as $flight) {

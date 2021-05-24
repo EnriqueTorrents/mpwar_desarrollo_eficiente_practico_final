@@ -15,10 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 final class FindFlightsGetController extends ApiController
 {
 
-    public function __invoke(string $dateFrom, string $dateTo): JsonResponse
+    public function __invoke(string $destination, string $dateFrom, string $dateTo): JsonResponse
     {
         $response = $this->ask(
             new FindFlightsQuery(
+                $destination,
                 $dateFrom,
                 $dateTo
             )
@@ -47,6 +48,7 @@ final class FindFlightsGetController extends ApiController
 
         return new JsonResponse(
             [
+                'destination' => $destination,
                 'date-from' => $dateFrom,
                 'date-to' => $dateTo,
                 'flights' => $flightsResponse,

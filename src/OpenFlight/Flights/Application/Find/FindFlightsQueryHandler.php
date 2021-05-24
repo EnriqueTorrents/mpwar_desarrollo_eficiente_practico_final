@@ -17,7 +17,7 @@ class FindFlightsQueryHandler implements QueryHandler
     {
         $dateTimeFrom = DateTimeValueObject::createDateTimeValueObjectFromString($query->getDateFrom());
         $dateTimeTo = DateTimeValueObject::createDateTimeValueObjectFromString($query->getDateTo());
-        return $this->flightsFinder->__invoke($dateTimeFrom, $dateTimeTo);
+        return $this->flightsFinder->__invoke($query->getDestination(), $dateTimeFrom, $dateTimeTo);
     }
 
 }

@@ -9,5 +9,5 @@ interface FlightRepository
 {
     public function create(Flight $flight): void;
 
-    public function findBetweenDates(DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): array;
+    public function findBetweenDates(string $destination, DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): array;
 }

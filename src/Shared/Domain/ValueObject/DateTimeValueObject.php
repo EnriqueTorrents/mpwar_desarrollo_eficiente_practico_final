@@ -10,6 +10,7 @@ class DateTimeValueObject
 {
     const today = "NOW";
     const dateFormat = 'Y-m-d H:i:s';
+    const defaultTime = '00:00:00';
 
     public function __construct(protected DateTime $value)
     {
@@ -23,7 +24,7 @@ class DateTimeValueObject
     public static function createDateTimeValueObjectFromString(string $date): DateTimeValueObject
     {
         if (self::checkStringDateHasNoTime($date)) {
-            $date .= ' 00:00:00';
+            $date .= ' ' . self::defaultTime;
         }
 
         return new self(DateTime::createFromFormat(self::dateFormat, $date));
