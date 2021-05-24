@@ -6,13 +6,13 @@ namespace CodelyTv\OpenFlight\Flights\Application\Find;
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
 use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
 
-class FlightsFinder
+class FlightsDestinationBetweenDatesFinder
 {
     public function __construct(private FlightRepository $repository)
     {
     }
 
-    public function __invoke(string $destination, DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): FindFlightsResponse
+    public function __invoke(string $destination, DateTimeValueObject $dateTimeFrom, DateTimeValueObject $dateTimeTo): FindFlightsDestinationBetweenDatesResponse
     {
         $flights = $this->repository->findBetweenDates($destination, $dateTimeFrom, $dateTimeTo);
 
@@ -20,7 +20,7 @@ class FlightsFinder
         foreach ($flights as $flight) {
             array_push(
                 $flightsResponse,
-                new FindFlightResponse(
+                new FindFlightDestinationBetweenDatesResponse(
                     $flight->getOrigin(),
                     $flight->getDestination(),
                     $flight->getFlightHours(),
@@ -32,7 +32,7 @@ class FlightsFinder
                 )
             );
         }
-        return new FindFlightsResponse($flightsResponse);
+        return new FindFlightsDestinationBetweenDatesResponse($flightsResponse);
     }
 
 }

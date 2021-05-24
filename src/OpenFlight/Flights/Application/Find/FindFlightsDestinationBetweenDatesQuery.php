@@ -6,7 +6,7 @@ namespace CodelyTv\OpenFlight\Flights\Application\Find;
 
 use CodelyTv\Shared\Domain\Bus\Query\Query;
 
-class FindFlightsQuery implements Query
+class FindFlightsDestinationBetweenDatesQuery implements Query
 {
     private string $destination;
     private string $dateFrom;

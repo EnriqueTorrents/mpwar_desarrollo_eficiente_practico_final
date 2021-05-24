@@ -6,7 +6,7 @@ namespace CodelyTv\OpenFlight\Flights\Application\Find;
 
 use CodelyTv\Shared\Domain\Bus\Query\Response;
 
-class FindFlightResponse implements Response
+class FindFlightDestinationBetweenDatesResponse implements Response
 {
     private string $origin;
     private string $destination;

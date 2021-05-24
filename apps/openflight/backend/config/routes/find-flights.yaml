@@ -1,4 +1,0 @@
-find-flights_get:
-  path: /find-flights/{destination}/{dateFrom}/{dateTo}
-  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\Flights\FindFlightsGetController
-  methods: [ GET ]
