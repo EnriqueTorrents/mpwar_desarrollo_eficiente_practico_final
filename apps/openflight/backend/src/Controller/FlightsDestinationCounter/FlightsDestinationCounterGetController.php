@@ -25,7 +25,8 @@ class FlightsDestinationCounterGetController extends ApiController
             [
                 'flight-destination' => $response->getFlightDestination(),
                 'total' => $response->getTotal(),
-            ]
+            ],
+            Response::HTTP_OK
         );
     }
 
