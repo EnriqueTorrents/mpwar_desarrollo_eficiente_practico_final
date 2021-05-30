@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FindUserBookingsGetController extends ApiController
 {
-    public function __invoke(string $userId)
+    public function __invoke(string $userId): JsonResponse
     {
         /** @var FindUserBookingsResponse $response */
         $response = $this->ask(new FindUserBookingsQuery($userId));
