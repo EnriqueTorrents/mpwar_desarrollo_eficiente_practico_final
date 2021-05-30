@@ -48,7 +48,7 @@ final class MysqlUserRepository implements UserRepository
         return new User($uuid, $user["Username"], $user["Name"], $user["LastName"], $user["Password"]);
     }
 
-    public function findById(Uuid $userId): ?User
+    public function search(Uuid $userId): ?User
     {
         $sql = 'SELECT * FROM user WHERE Id = :id LIMIT 1';
         $statement = $this->mysql->PDO()->prepare($sql);
