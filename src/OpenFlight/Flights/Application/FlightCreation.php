@@ -5,6 +5,7 @@ namespace CodelyTv\OpenFlight\Flights\Application;
 
 
 use CodelyTv\OpenFlight\Flights\Domain\Flight;
+use CodelyTv\OpenFlight\Flights\Domain\FlightExist;
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
 use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
@@ -29,6 +30,12 @@ class FlightCreation
         string $aircraft,
         string $airline
     ): void {
+
+        $flight = $this->repository->search($id);
+
+        if(!empty($flight)){
+            throw new FlightExist();
+        }
 
         $flight = Flight::CreateFlight(
             $id,

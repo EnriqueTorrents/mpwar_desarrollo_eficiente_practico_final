@@ -7,6 +7,7 @@ namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Flights;
 
 
 use CodelyTv\OpenFlight\Flights\Application\CreateFlightCommand;
+use CodelyTv\OpenFlight\Flights\Domain\FlightExist;
 use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +36,9 @@ final class CreateFlightPostController extends ApiController
 
     protected function exceptions(): array
     {
-        return [];
+        return [
+            FlightExist::class => Response::HTTP_CONFLICT,
+        ];
     }
 
 }
