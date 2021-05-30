@@ -61,6 +61,6 @@ CREATE TABLE `flights_destination_counter` (
    `id` CHAR(36)        NOT  NULL,
    `destination`        TEXT NOT NULL,
    `total`              INT  NOT NULL,
-   `existing_flights`   JSON NOT NULL,
+   `existing_flights`   TEXT NOT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
