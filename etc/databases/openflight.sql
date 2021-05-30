@@ -49,18 +49,18 @@ CREATE TABLE `book`
 DROP TABLE IF EXISTS `luggage`;
 CREATE TABLE `luggage`
 (
-    `Id`            CHAR(36) NOT NULL,
-    `Type`          TEXT     NOT NULL,
-    `Weight-value`        INT     NOT NULL,
+    `Id`            CHAR(36)    NOT NULL,
+    `Type`          TEXT        NOT NULL,
+    `Weight-value`  INT         NOT NULL,
     `Weight-unit`   CHAR(5)     NOT NULL,
-    `book-id`       CHAR(36) NOT NULL,
+    `book-id`       CHAR(36)    NOT NULL,
     PRIMARY KEY (`Id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `flights_destination_counter` (
-   `id` CHAR(36)        NOT  NULL,
-   `destination`        TEXT NOT NULL,
-   `total`              INT  NOT NULL,
-   `existing_flights`   TEXT NOT NULL,
+   `id`                 CHAR(36)    NOT  NULL,
+   `destination`        TEXT        NOT NULL,
+   `total`              INT         NOT NULL,
+   `existing_flights`   TEXT        NOT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
