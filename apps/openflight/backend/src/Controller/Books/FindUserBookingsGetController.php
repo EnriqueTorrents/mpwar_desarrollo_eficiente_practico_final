@@ -24,14 +24,19 @@ class FindUserBookingsGetController extends ApiController
             array_push(
                 $userBookingsResponse,
                 [
-                    'flight-id' => $book->getFlightId(),
+                    'buy-date' => $book->getBuyDate(),
+                    'seat-number' => $book->getSeatNumber(),
+                    'seat-letter' => $book->getSeatLetter(),
+                    'seat-class' => $book->getSeatClass(),
+                    'price-value' => $book->getPriceValue(),
+                    'price-currency' => $book->getPriceCurrency()
                 ]
             );
         }
 
         return new JsonResponse(
             [
-                'user-id' => $response->getUserId(),
+                'username' => $response->getUsername(),
                 'bookings' => $userBookingsResponse,
             ],
             Response::HTTP_OK
