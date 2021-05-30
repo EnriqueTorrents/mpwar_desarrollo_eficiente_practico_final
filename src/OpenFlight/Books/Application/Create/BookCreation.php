@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CodelyTv\OpenFlight\Books\Application;
+namespace CodelyTv\OpenFlight\Books\Application\Create;
 
 
 use CodelyTv\OpenFlight\Books\Domain\Book;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Books;
 
-use CodelyTv\OpenFlight\Books\Application\CreateBookCommand;
+use CodelyTv\OpenFlight\Books\Application\Create\CreateBookCommand;
 use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
