@@ -8,7 +8,12 @@ namespace CodelyTv\OpenFlight\Books\Infrastructure;
 
 use CodelyTv\OpenFlight\Books\Domain\Book;
 use CodelyTv\OpenFlight\Books\Domain\BookRepository;
+use CodelyTv\OpenFlight\Books\Domain\Luggage;
+use CodelyTv\OpenFlight\Books\Domain\SeatValueObject;
+use CodelyTv\OpenFlight\Books\Domain\WeightValueObject;
 use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
+use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
+use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
 
 
@@ -44,4 +49,36 @@ final class MysqlBookRepository implements BookRepository
         $statementLuggage->execute();
     }
 
+    public function findByUserId(Uuid $userId): array
+    {
+        $sql = 'SELECT * FROM book WHERE `User-id` = :userId';
+        $statement = $this->mysql->PDO()->prepare($sql);
+        $statement->bindValue(':userId', $userId->value());
+        $statement->execute();
+        $bookingsSelect = $statement->fetchAll();
+
+        if (empty($bookingsSelect)) {
+            return [];
+        }
+
+        $bookings = [];
+        foreach ($bookingsSelect as $book) {
+            $bookings[] = new Book(
+                new Uuid($book["Id"]),
+                DateTimeValueObject::createDateTimeValueObjectFromString($book["Buy-date"]),
+                SeatValueObject::createSeat(intval($book["Number-seat"]), $book["Letter-seat"], $book["Class-seat"]),
+                PriceValueObject::createPrice(intval($book["Price"]), $book["Currency"]),
+                new Uuid($book["Flight-id"]),
+                new Uuid($book["User-id"]),
+                Luggage::createLuggage(
+                    new Uuid($book["Id"]),
+                    $book["Id"],
+                    WeightValueObject::createWeight(12, 'kg'),
+                    new Uuid($book["Id"])
+                )
+            );
+        }
+
+        return $bookings;
+    }
 }
