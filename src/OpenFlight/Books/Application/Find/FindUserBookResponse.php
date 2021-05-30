@@ -4,6 +4,7 @@
 namespace CodelyTv\OpenFlight\Books\Application\Find;
 
 
+use CodelyTv\OpenFlight\Flights\Application\FindFlightResponse;
 use CodelyTv\Shared\Domain\Bus\Query\Response;
 
 class FindUserBookResponse implements Response
@@ -14,7 +15,8 @@ class FindUserBookResponse implements Response
         private string $seatLetter,
         private string $seatClass,
         private int $priceValue,
-        private string $priceCurrency
+        private string $priceCurrency,
+        private FindFlightResponse $flightResponse
     ) {
     }
 
@@ -48,5 +50,9 @@ class FindUserBookResponse implements Response
         return $this->priceCurrency;
     }
 
+    public function getFlightResponse(): FindFlightResponse
+    {
+        return $this->flightResponse;
+    }
 
 }
