@@ -1,0 +1,4 @@
+flights-destination-counter_get:
+  path: /flights-destination-counter/{flightDestination}
+  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\FlightsDestinationCounter\FlightsDestinationCounterGetController
+  methods: [ GET ]
