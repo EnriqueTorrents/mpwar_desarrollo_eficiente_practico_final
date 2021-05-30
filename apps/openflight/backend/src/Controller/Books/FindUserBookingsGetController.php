@@ -38,6 +38,11 @@ class FindUserBookingsGetController extends ApiController
                         'departure-date' => $book->getFlightResponse()->getDepartureDate(),
                         'aircraft' => $book->getFlightResponse()->getAircraft(),
                         'airline' => $book->getFlightResponse()->getAirline()
+                    ],
+                    'luggage' => [
+                        'type' => $book->getUserBookLuggageResponse()->getType(),
+                        'weight-number' => $book->getUserBookLuggageResponse()->getWeightNumber(),
+                        'weight-unit' => $book->getUserBookLuggageResponse()->getWeightUnit()
                     ]
                 ]
             );

@@ -16,7 +16,8 @@ class FindUserBookResponse implements Response
         private string $seatClass,
         private int $priceValue,
         private string $priceCurrency,
-        private FindFlightResponse $flightResponse
+        private FindFlightResponse $flightResponse,
+        private FindUserBookLuggageResponse $userBookLuggageResponse
     ) {
     }
 
@@ -53,6 +54,11 @@ class FindUserBookResponse implements Response
     public function getFlightResponse(): FindFlightResponse
     {
         return $this->flightResponse;
+    }
+
+    public function getUserBookLuggageResponse(): FindUserBookLuggageResponse
+    {
+        return $this->userBookLuggageResponse;
     }
 
 }

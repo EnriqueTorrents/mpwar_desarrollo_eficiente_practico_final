@@ -51,6 +51,11 @@ class UserBookingsFinder
                     DateTimeValueObject::convertDateTimeToString($flight->getDepartureDate()),
                     $flight->getAircraft(),
                     $flight->getAirline()
+                ),
+                new FindUserBookLuggageResponse(
+                    $book->getLuggage()->getType(),
+                    $book->getLuggage()->getWeight()->getNumber(),
+                    $book->getLuggage()->getWeight()->getUnit()
                 )
             );
         }
