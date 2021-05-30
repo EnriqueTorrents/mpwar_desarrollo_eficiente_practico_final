@@ -7,6 +7,7 @@ namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Books;
 use CodelyTv\OpenFlight\Books\Application\Find\FindUserBookingsQuery;
 use CodelyTv\OpenFlight\Books\Application\Find\FindUserBookingsResponse;
 use CodelyTv\OpenFlight\Books\Application\Find\FindUserBookResponse;
+use CodelyTv\OpenFlight\Users\Domain\UserNotExist;
 use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,15 @@ class FindUserBookingsGetController extends ApiController
                     'seat-letter' => $book->getSeatLetter(),
                     'seat-class' => $book->getSeatClass(),
                     'price-value' => $book->getPriceValue(),
-                    'price-currency' => $book->getPriceCurrency()
+                    'price-currency' => $book->getPriceCurrency(),
+                    'flight' => [
+                        'origin' => $book->getFlightResponse()->getOrigin(),
+                        'destination' => $book->getFlightResponse()->getDestination(),
+                        'flight-hours' => $book->getFlightResponse()->getFlightHours(),
+                        'departure-date' => $book->getFlightResponse()->getDepartureDate(),
+                        'aircraft' => $book->getFlightResponse()->getAircraft(),
+                        'airline' => $book->getFlightResponse()->getAirline()
+                    ]
                 ]
             );
         }
@@ -45,7 +54,9 @@ class FindUserBookingsGetController extends ApiController
 
     protected function exceptions(): array
     {
-        return [];
+        return [
+            UserNotExist::class => Response::HTTP_NOT_FOUND
+        ];
     }
 
 
