@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Flights;
 
 
+use CodelyTv\OpenFlight\Flights\Application\Find\FindFlightDestinationBetweenDatesResponse;
 use CodelyTv\OpenFlight\Flights\Application\Find\FindFlightsDestinationBetweenDatesQuery;
 use CodelyTv\OpenFlight\Flights\Application\Find\FindFlightsDestinationBetweenDatesResponse;
 use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
@@ -27,6 +28,7 @@ final class FindFlightsDestinationBetweenDatesGetController extends ApiControlle
         );
 
         $flightsResponse = [];
+        /** @var FindFlightDestinationBetweenDatesResponse $flightResponse */
         foreach ($response->getFlights() as $flightResponse) {
             array_push(
                 $flightsResponse,
