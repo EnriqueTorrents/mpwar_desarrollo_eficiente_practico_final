@@ -7,6 +7,7 @@ namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Flights;
 
 
 use CodelyTv\OpenFlight\Flights\Application\Find\FindFlightsDestinationBetweenDatesQuery;
+use CodelyTv\OpenFlight\Flights\Application\Find\FindFlightsDestinationBetweenDatesResponse;
 use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ final class FindFlightsDestinationBetweenDatesGetController extends ApiControlle
 
     public function __invoke(string $destination, string $dateFrom, string $dateTo): JsonResponse
     {
+        /** @var FindFlightsDestinationBetweenDatesResponse $response */
         $response = $this->ask(
             new FindFlightsDestinationBetweenDatesQuery(
                 $destination,
