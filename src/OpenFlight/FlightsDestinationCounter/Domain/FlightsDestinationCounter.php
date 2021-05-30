@@ -9,19 +9,18 @@ use CodelyTv\Shared\Domain\ValueObject\Uuid;
 
 class FlightsDestinationCounter extends AggregateRoot
 {
-    const initialCounterValue = 0;
 
     public function __construct(
         private Uuid $id,
         private string $flightDestination,
-        private int $total,
+        private FlightsDestinationCounterTotal $total,
         private array $existingFlights
     ) {
     }
 
     public static function initialize(Uuid $id, string $destination): self
     {
-        return new self($id, $destination, self::initialCounterValue, []);
+        return new self($id, $destination, FlightsDestinationCounterTotal::initialize(), []);
     }
 
     public function getId(): Uuid
@@ -34,7 +33,7 @@ class FlightsDestinationCounter extends AggregateRoot
         return $this->flightDestination;
     }
 
-    public function getTotal(): int
+    public function getTotal(): FlightsDestinationCounterTotal
     {
         return $this->total;
     }
@@ -51,13 +50,13 @@ class FlightsDestinationCounter extends AggregateRoot
 
     public function increment(Uuid $flightId)
     {
-        $this->total += 1;
+        $this->total = $this->total->increment();
         $this->existingFlights[] = $flightId;
         $this->record(
             new FlightsDestinationCounterIncrementedDomainEvent(
                 $this->getId()->value(),
                 $this->getFlightDestination(),
-                $this->getTotal()
+                $this->getTotal()->value()
             )
         );
     }

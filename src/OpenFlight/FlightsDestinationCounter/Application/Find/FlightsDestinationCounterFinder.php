@@ -22,6 +22,6 @@ class FlightsDestinationCounterFinder
             throw new FlightsDestinationCounterNotExist();
         }
 
-        return new FlightsDestinationCounterResponse($counter->getFlightDestination(), $counter->getTotal());
+        return new FlightsDestinationCounterResponse($counter->getFlightDestination(), $counter->getTotal()->value());
     }
 }

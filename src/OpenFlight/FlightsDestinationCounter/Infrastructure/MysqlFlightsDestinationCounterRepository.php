@@ -6,6 +6,7 @@ namespace CodelyTv\OpenFlight\FlightsDestinationCounter\Infrastructure;
 
 use CodelyTv\OpenFlight\FlightsDestinationCounter\Domain\FlightsDestinationCounter;
 use CodelyTv\OpenFlight\FlightsDestinationCounter\Domain\FlightsDestinationCounterRepository;
+use CodelyTv\OpenFlight\FlightsDestinationCounter\Domain\FlightsDestinationCounterTotal;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
 
@@ -21,7 +22,7 @@ final class MysqlFlightsDestinationCounterRepository implements FlightsDestinati
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':id', $counter->getId()->value());
         $statement->bindValue(':destination', $counter->getFlightDestination());
-        $statement->bindValue(':total', $counter->getTotal());
+        $statement->bindValue(':total', $counter->getTotal()->value());
         $statement->bindValue(
             ':existing_flights',
             json_encode(
@@ -39,7 +40,7 @@ final class MysqlFlightsDestinationCounterRepository implements FlightsDestinati
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':id', $counter->getId()->value());
         $statement->bindValue(':destination', $counter->getFlightDestination());
-        $statement->bindValue(':total', $counter->getTotal());
+        $statement->bindValue(':total', $counter->getTotal()->value());
         $statement->bindValue(
             ':existing_flights',
             json_encode(
@@ -71,7 +72,9 @@ final class MysqlFlightsDestinationCounterRepository implements FlightsDestinati
         return new FlightsDestinationCounter(
             new Uuid($flightsDestinationCounter["id"]),
             $flightsDestinationCounter["destination"],
-            intval($flightsDestinationCounter["total"]),
+            FlightsDestinationCounterTotal::newFlightsDestinationCounterTotal(
+                intval($flightsDestinationCounter["total"])
+            ),
             $existingFlights
         );
     }
