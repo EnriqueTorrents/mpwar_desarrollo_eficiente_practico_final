@@ -36,7 +36,7 @@ final class MysqlFlightsDestinationCounterRepository implements FlightsDestinati
 
     public function update(FlightsDestinationCounter $counter): void
     {
-        $sql = 'UPDATE flights_destination_counter SET id=:id, destination=:destination, total=:total, existing_flights=:existing_flights';
+        $sql = 'UPDATE flights_destination_counter SET destination=:destination, total=:total, existing_flights=:existing_flights WHERE id=:id';
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':id', $counter->getId()->value());
         $statement->bindValue(':destination', $counter->getFlightDestination());
