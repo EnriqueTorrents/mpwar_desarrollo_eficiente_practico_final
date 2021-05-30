@@ -13,7 +13,7 @@ class FindUserBookingsQueryHandler implements QueryHandler
     {
     }
 
-    public function __invoke(FindUserBookingsQuery $query)
+    public function __invoke(FindUserBookingsQuery $query): FindUserBookingsResponse
     {
         $userId = new Uuid($query->getUserId());
         return $this->bookingsFinder->__invoke($userId);
