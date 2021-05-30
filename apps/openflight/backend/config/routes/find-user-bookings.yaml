@@ -1,0 +1,4 @@
+find-user-bookings_get:
+  path: /find-user-bookings/{userId}
+  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\Books\FindUserBookingsGetController
+  methods: [ GET ]
