@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CodelyTv\OpenFlight\Flights\Application;
+namespace CodelyTv\OpenFlight\Flights\Application\Create;
 
 
 use CodelyTv\OpenFlight\Flights\Domain\Flight;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodelyTv\OpenFlight\Flights\Application;
+namespace CodelyTv\OpenFlight\Flights\Application\Create;
 
 use CodelyTv\Shared\Domain\Bus\Command\Command;
 

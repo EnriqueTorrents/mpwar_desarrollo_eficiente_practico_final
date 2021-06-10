@@ -1,0 +1,4 @@
+find-flights-destination-between-dates_get:
+  path: /find-flights-destination-between-dates/{destination}/{dateFrom}/{dateTo}
+  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\Flights\FindFlightsDestinationBetweenDatesGetController
+  methods: [ GET ]

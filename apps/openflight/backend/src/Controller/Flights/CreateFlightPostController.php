@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Flights;
 
 
-use CodelyTv\OpenFlight\Flights\Application\CreateFlightCommand;
+use CodelyTv\OpenFlight\Flights\Application\Create\CreateFlightCommand;
 use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
